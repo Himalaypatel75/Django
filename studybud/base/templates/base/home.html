@@ -3,13 +3,43 @@
 
 {% block content %}
 
-<h1>Home Tamp</h1>
+<style>
+    .home-container{
+        display:grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
 
-<div>
+<div class="home-container">
+    
+    <div>
+        <h3>Browse Topics</h3>
+        <hr>
+    </div>
+
+    <div>
+    <h1>Home Tamp</h1>
+    
+    <h2><a href="{% url 'create-room' %}">Create Room </a></h2>
+
+    <hr>
+    
     {% for room in rooms %}
+    <br>
         <div>
+            <a href="{% url 'update-room' room.id %}">Edit Room Details</a>
+            <br>
+            <br>
+            <a href="{% url 'delete-room' room.id %}">Delete Room</a>
+            <br>
+            <br>
+            <span>@{{room.host.username}}</span>
             <h5>{{room.id}} -- <a href="{% url 'room' room.id %}">{{room.name}}</a></h5>
+            <small>{{room.topic.name}}</small>
+            <hr>
         </div>
+    </div>
+
     {% endfor %}
 </div>
 
